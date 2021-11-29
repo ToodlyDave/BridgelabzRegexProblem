@@ -7,11 +7,11 @@ public class RegexTest {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-		System.out.print(" Please enter the phone number: ");
-		String phone = scan.nextLine();
+		System.out.print(" Please enter the password: ");
+		String password = scan.nextLine();
 		
 		UserDetails userDetails = new UserDetails();
-		userDetails.phoneNumber(phone);
+		userDetails.password(password);
 		scan.close();
 	}
 }
