@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public class UserDetails {
 	
-	final String FIRST_NAME = "^[A-Z][a-z]{2,}$";
+	final String NAME = "^[A-Z][a-z]{2,}(\\s)?[A-Z][a-z]{2,}$";
 
 	public void firstName(String name) {
 		
-		Pattern pattern = Pattern.compile(FIRST_NAME);
+		Pattern pattern = Pattern.compile(NAME);
 		Matcher match = pattern.matcher(name);
 		System.out.println(match.matches());
 		
