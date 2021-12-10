@@ -71,60 +71,60 @@ public class RegexJunit {
 	@Test
 	public void testEmail() throws InvalidEmailException {
 		assumeTrue(expectedResult == true);
-		boolean output = userDetails.email(input);
+		boolean output = userDetails.email.email(input);
 		assertEquals(expectedResult, output);
 	}
 	
 	@Test(expected = InvalidEmailException.class)
 	public void testEmailSad() throws InvalidEmailException {
 		assumeTrue(expectedResult == false);
-		assertEquals(expectedResult, userDetails.email(input));
+		assertEquals(expectedResult, userDetails.email.email(input) );
 	}
 
 	@Test
 	public void firstNameHappy() throws InvalidNameException {
-		boolean output = userDetails.firstName("David Alapat");
+		boolean output = userDetails.name.name("David Alapat");
 		assertEquals(true, output);
 	}
 	
 	@Test(expected = InvalidNameException.class)
 	public void firstNameSad() throws InvalidNameException {
-		userDetails.firstName("david");
+		userDetails.name.name("david");
 	}
 	
 	@Test
 	public void phoneNumberHappy() throws InvalidPhoneNumberException {
-		boolean output = userDetails.phoneNumber("91 1234567890");
+		boolean output = userDetails.phone.phone("91 1234567890");
 		assertEquals(true, output);
 	}
 	
 	@Test(expected = InvalidPhoneNumberException.class)
 	public void phoneNumberSad() throws InvalidPhoneNumberException {
-		boolean output = userDetails.phoneNumber("hi@@gmail.com");
+		boolean output = userDetails.phone.phone("hi@@gmail.com");
 		assertEquals(false, output);
 	}
 	
 	@Test
 	public void passwordHappy() throws InvalidPasswordException {
-		boolean output = userDetails.password("hi5!There");
+		boolean output = userDetails.password.password("hi5!There");
 		assertEquals(true, output);
 	}
 	
 	@Test(expected = InvalidPasswordException.class)
 	public void passwordSad() throws InvalidPasswordException {
-		boolean output = userDetails.password("hi!!therekfjslkf");
+		boolean output = userDetails.password.password("hi!!therekfjslkf");
 		assertEquals(false, output);
 	}
 	
 	@Test
 	public void emailHappy() throws InvalidEmailException {
-		boolean output = userDetails.email("hi@gmail.com");
+		boolean output = userDetails.email.email("hi@gmail.com");
 		assertEquals(true, output);
 	}
 	
 	@Test(expected = InvalidEmailException.class)
 	public void emailSad() throws InvalidEmailException {
-		boolean output = userDetails.email("hi@@gmail.com");
+		boolean output = userDetails.email.email("hi@@gmail.com");
 		assertEquals(false, output);
 	}
 	
