@@ -1,6 +1,7 @@
 package com.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,6 +12,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.exception.InvalidEmailException;
+import com.exception.InvalidNameException;
+import com.exception.InvalidPasswordException;
+import com.exception.InvalidPhoneNumberException;
 import com.user.UserDetails;
 
 @RunWith(Parameterized.class)
@@ -32,7 +37,7 @@ public class RegexJunit {
 		userDetails = new UserDetails();
 	}
 	
-	@Parameters(name="emailInputs()")
+	@Parameters
 	public static Collection emailInputs() {
 		return Arrays.asList(new Object[][] {
 			{"abc@yahoo.com", true},
@@ -60,72 +65,65 @@ public class RegexJunit {
 		});		
 	}
 	
-//	public void j() {
-//		Collection stuff = RegexJunit.emailInputs();
-//		RegexJunit obj1 = new RegexJunit(stuff[0][0], stuff[0][1]);
-//		obj1.testEmail();
-//	}
-	
-//	@Parameters(name="inputs()")
-//	public static Collection inputs() {
-//		return Arrays.asList(new Object[][] {
-//			{"David Alapat", true},
-//			{"david", false},
-//		});
-//	}
+
 	
 
 	@Test
-	public void testEmail() {
-		
+	public void testEmail() throws InvalidEmailException {
+		assumeTrue(expectedResult == true);
 		boolean output = userDetails.email(input);
 		assertEquals(expectedResult, output);
 	}
+	
+	@Test(expected = InvalidEmailException.class)
+	public void testEmailSad() throws InvalidEmailException {
+		assumeTrue(expectedResult == false);
+		assertEquals(expectedResult, userDetails.email(input));
+	}
 
 	@Test
-	public void firstNameHappy() {
-		boolean output = userDetails.firstName("David");
-		assertEquals(false, output);
+	public void firstNameHappy() throws InvalidNameException {
+		boolean output = userDetails.firstName("David Alapat");
+		assertEquals(true, output);
+	}
+	
+	@Test(expected = InvalidNameException.class)
+	public void firstNameSad() throws InvalidNameException {
+		userDetails.firstName("david");
 	}
 	
 	@Test
-	public void firstNameSad() {
-		boolean output = userDetails.firstName("david");
-		assertEquals(false, output);
-	}
-	
-	@Test
-	public void phoneNumberHappy() {
+	public void phoneNumberHappy() throws InvalidPhoneNumberException {
 		boolean output = userDetails.phoneNumber("91 1234567890");
 		assertEquals(true, output);
 	}
 	
-	@Test
-	public void phoneNumberSad() {
+	@Test(expected = InvalidPhoneNumberException.class)
+	public void phoneNumberSad() throws InvalidPhoneNumberException {
 		boolean output = userDetails.phoneNumber("hi@@gmail.com");
 		assertEquals(false, output);
 	}
 	
 	@Test
-	public void passwordHappy() {
+	public void passwordHappy() throws InvalidPasswordException {
 		boolean output = userDetails.password("hi5!There");
 		assertEquals(true, output);
 	}
 	
-	@Test
-	public void passwordSad() {
+	@Test(expected = InvalidPasswordException.class)
+	public void passwordSad() throws InvalidPasswordException {
 		boolean output = userDetails.password("hi!!therekfjslkf");
 		assertEquals(false, output);
 	}
 	
 	@Test
-	public void emailHappy() {
+	public void emailHappy() throws InvalidEmailException {
 		boolean output = userDetails.email("hi@gmail.com");
 		assertEquals(true, output);
 	}
 	
-	@Test
-	public void emailSad() {
+	@Test(expected = InvalidEmailException.class)
+	public void emailSad() throws InvalidEmailException {
 		boolean output = userDetails.email("hi@@gmail.com");
 		assertEquals(false, output);
 	}
