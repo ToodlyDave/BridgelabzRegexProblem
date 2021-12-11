@@ -5,5 +5,5 @@ import com.exception.InvalidNameException;
 @FunctionalInterface
 public interface INameValidation {
 
-	public boolean name(String name) throws InvalidNameException;
+	public boolean nameValidation(String name) throws InvalidNameException;
 }

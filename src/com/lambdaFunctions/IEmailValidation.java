@@ -5,5 +5,5 @@ import com.exception.InvalidEmailException;
 @FunctionalInterface
 public interface IEmailValidation {
 
-	public boolean email(String email) throws InvalidEmailException;
+	public boolean emailValidation(String email) throws InvalidEmailException;
 }

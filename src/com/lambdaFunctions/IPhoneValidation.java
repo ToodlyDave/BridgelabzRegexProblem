@@ -5,5 +5,5 @@ import com.exception.InvalidPhoneNumberException;
 @FunctionalInterface
 public interface IPhoneValidation {
 
-	public boolean phone(String phone) throws InvalidPhoneNumberException;
+	public boolean phoneValidation(String phone) throws InvalidPhoneNumberException;
 }
