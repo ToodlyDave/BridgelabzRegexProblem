@@ -19,56 +19,40 @@ public class UserDetails {
 	final String PHONE = "^[0-9]{1,3}[\\s][0-9]{10}$";
 	final String PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=[^_\\W]*[_\\W][^_\\W]*$).{8,}$";
 
-	public INameValidation name = new INameValidation() {
-
-		@Override
-		public boolean nameValidation(String name) throws InvalidNameException {
-			Pattern pattern = Pattern.compile(NAME);
-			Matcher match = pattern.matcher(name);
-			System.out.println(match.matches());
-			if (!match.matches())
-				throw new InvalidNameException();
-			return match.matches();
-		}
+	public INameValidation nameValidation = (name) -> {
+		Pattern pattern = Pattern.compile(NAME);
+		Matcher match = pattern.matcher(name);
+		System.out.println(match.matches());
+		if (!match.matches())
+			throw new InvalidNameException();
+		return match.matches();
 	};
 
-	public IEmailValidation email = new IEmailValidation() {
-
-		@Override
-		public boolean emailValidation(String email) throws InvalidEmailException {
+	public IEmailValidation emailValidation = (email) -> {
 			Pattern pattern = Pattern.compile(EMAIL);
 			Matcher match = pattern.matcher(email);
 			System.out.println(match.matches());
 			if (!match.matches())
 				throw new InvalidEmailException();
 			return match.matches();
-		}
-	};
+		};
 
-	public IPhoneValidation phone = new IPhoneValidation() {
-
-		@Override
-		public boolean phoneValidation(String phone) throws InvalidPhoneNumberException {
+	public IPhoneValidation phoneValidation = (phone) -> {
 			Pattern pattern = Pattern.compile(PHONE);
 			Matcher match = pattern.matcher(phone);
 			System.out.println(match.matches());
 			if (!match.matches())
 				throw new InvalidPhoneNumberException();
 			return match.matches();
-		}
 	};
 
-	public IPasswordValidation password = new IPasswordValidation() {
-
-		@Override
-		public boolean passwordValidation(String password) throws InvalidPasswordException {
+	public IPasswordValidation passwordValidation = (password) -> {
 			Pattern pattern = Pattern.compile(PASSWORD);
 			Matcher match = pattern.matcher(password);
 			System.out.println(match.matches());
 			if (!match.matches())
 				throw new InvalidPasswordException();
 			return match.matches();
-		}
 	};
 
 }

@@ -68,61 +68,58 @@ public class RegexJunit {
 	@Test
 	public void testEmail() throws InvalidEmailException {
 		assumeTrue(expectedResult == true);
-		boolean output = userDetails.email.emailValidation(input);
+		boolean output = userDetails.emailValidation.emailValidation(input);
 		assertEquals(expectedResult, output);
 	}
 
 	@Test(expected = InvalidEmailException.class)
 	public void testEmailSad() throws InvalidEmailException {
 		assumeTrue(expectedResult == false);
-		assertEquals(expectedResult, userDetails.email.emailValidation(input));
+		userDetails.emailValidation.emailValidation(input);
 	}
 
 	@Test
 	public void firstNameHappy() throws InvalidNameException {
-		boolean output = userDetails.name.nameValidation("David Alapat");
+		boolean output = userDetails.nameValidation.nameValidation("David Alapat");
 		assertEquals(true, output);
 	}
 
 	@Test(expected = InvalidNameException.class)
 	public void firstNameSad() throws InvalidNameException {
-		userDetails.name.nameValidation("david");
+		userDetails.nameValidation.nameValidation("david");
 	}
 
 	@Test
 	public void phoneNumberHappy() throws InvalidPhoneNumberException {
-		boolean output = userDetails.phone.phoneValidation("91 1234567890");
+		boolean output = userDetails.phoneValidation.phoneValidation("91 1234567890");
 		assertEquals(true, output);
 	}
 
 	@Test(expected = InvalidPhoneNumberException.class)
 	public void phoneNumberSad() throws InvalidPhoneNumberException {
-		boolean output = userDetails.phone.phoneValidation("hi@@gmail.com");
-		assertEquals(false, output);
+		userDetails.phoneValidation.phoneValidation("hi@@gmail.com");
 	}
 
 	@Test
 	public void passwordHappy() throws InvalidPasswordException {
-		boolean output = userDetails.password.passwordValidation("hi5!There");
+		boolean output = userDetails.passwordValidation.passwordValidation("hi5!There");
 		assertEquals(true, output);
 	}
 
 	@Test(expected = InvalidPasswordException.class)
 	public void passwordSad() throws InvalidPasswordException {
-		boolean output = userDetails.password.passwordValidation("hi!!therekfjslkf");
-		assertEquals(false, output);
+		userDetails.passwordValidation.passwordValidation("hi!!therekfjslkf");
 	}
 
 	@Test
 	public void emailHappy() throws InvalidEmailException {
-		boolean output = userDetails.email.emailValidation("hi@gmail.com");
+		boolean output = userDetails.emailValidation.emailValidation("hi@gmail.com");
 		assertEquals(true, output);
 	}
 
 	@Test(expected = InvalidEmailException.class)
 	public void emailSad() throws InvalidEmailException {
-		boolean output = userDetails.email.emailValidation("hi@@gmail.com");
-		assertEquals(false, output);
+		userDetails.emailValidation.emailValidation("hi@@gmail.com");
 	}
 
 }
